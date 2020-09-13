@@ -15,10 +15,14 @@ def main():
     longpoll = VkBotLongPoll(vk_session, config.VK_GROUP_ID)
     for event in longpoll.listen():
         if event.type == VkBotEventType.MESSAGE_NEW:
+            # Get sender's peer_id and nickname from text
             peer_id = event.object.message['peer_id']
             nickname = event.object.message['text']
             stats = get_data(nickname)
-            vk_session.method("messages.send", {"peer_id": peer_id, "random_id": get_random_id(), "message": stats})
+            # Send statistics of this player
+            vk_session.method("messages.send", {"peer_id": peer_id,
+                                                "random_id": get_random_id(),
+                                                "message": stats})
 
 if __name__ == "__main__":
     main()
