@@ -19,6 +19,7 @@ def get_data(nickname):
         # Then get K/D, HS%, WR%
         stats_request = requests.get(f"https://open.faceit.com/data/v4/players/{player['player_id']}/stats/csgo", headers=headers)
         stats = json.loads(stats_request.content)["lifetime"]
+        # Making message to send using stats that were recieved
         stats_message = f"{nickname}\n&#9889;LVL - {player_data['skill_level']} &#9889;" \
                         f"\n&#128142;ELO - {player_data['faceit_elo']} &#128142;" \
                         f"\n&#128299;K/D - {stats['Average K/D Ratio']} &#128299;" \
